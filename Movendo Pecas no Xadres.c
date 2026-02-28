@@ -1,57 +1,76 @@
 #include <stdio.h>
 
+// --- FUNCOES RECURSIVAS ---
+
+// Funcao recursiva para a Torre
+void moverTorre(int casas) {
+    if (casas > 0) {
+        printf("Direita\n");
+        moverTorre(casas - 1); // Chamada recursiva diminuindo o contador
+    }
+}
+
+// Funcao recursiva para a Rainha
+void moverRainha(int casas) {
+    if (casas > 0) {
+        printf("Esquerda\n");
+        moverRainha(casas - 1);
+    }
+}
+
+// Funcao recursiva para o Bispo (Movimento Diagonal)
+void moverBispoRecursivo(int casas) {
+    if (casas > 0) {
+        printf("Cima Direita\n");
+        moverBispoRecursivo(casas - 1);
+    }
+}
+
 int main() {
-    // Definicao das constantes de movimento
+    // Definicao das constantes
     int casasTorre = 5;
     int casasBispo = 5;
     int casasRainha = 8;
-    int casasCavaloBaixo = 2;
-    int casasCavaloEsquerda = 1;
 
-    // --- MOVIMENTACAO DA TORRE ---
-    // Utilizando a estrutura FOR
+    // --- MOVIMENTACAO DA TORRE (RECURSIVIDADE) ---
     printf("Movimento da Torre:\n");
-    for (int i = 0; i < casasTorre; i++) {
-        printf("Direita\n");
-    }
+    moverTorre(casasTorre);
     printf("\n");
 
-    // --- MOVIMENTACAO DO BISPO ---
-    // Utilizando a estrutura WHILE
+    // --- MOVIMENTACAO DO BISPO (RECURSIVIDADE + LOOPS ANINHADOS) ---
     printf("Movimento do Bispo:\n");
-    int b = 0;
-    while (b < casasBispo) {
-        printf("Cima Direita\n");
-        b++;
+    
+    for (int i = 0; i < casasBispo; i++) {
+        for (int j = 0; j < 1; j++) {
+            printf("Cima "); // Movimento Vertical
+        }
+        printf("Direita\n"); // Movimento Horizontal
     }
     printf("\n");
 
-    // --- MOVIMENTACAO DA RAINHA ---
-    // Utilizando a estrutura DO-WHILE
+    // --- MOVIMENTACAO da RAINHA (RECURSIVIDADE) ---
     printf("Movimento da Rainha:\n");
-    int r = 0;
-    do {
-        printf("Esquerda\n");
-        r++;
-    } while (r < casasRainha);
+    moverRainha(casasRainha);
     printf("\n");
 
     // --- MOVIMENTACAO DO CAVALO ---
-    // Implementacao de loops aninhados: um FOR e um WHILE
+    // Movimento: 2 para Cima e 1 para a Direita
     printf("Movimento do Cavalo:\n");
-
-    // Loop FOR externo para controlar as duas casas para baixo
-    for (int i = 0; i < 1; i++) {
-        int j = 0;
-        // Loop WHILE interno para imprimir as casas para baixo
-        while (j < casasCavaloBaixo) {
-            printf("Baixo\n");
-            j++;
-        }
-        // formando o movimento em "L"
-        printf("Esquerda\n");
-    }
     
+    // Loop aninhado com multiplas variaveis e condicoes
+    for (int i = 0, j = 0; i < 2; i++) {
+        while (j < 1) {
+            // Este loop interno controla o salto final para a direita
+            // Mas so deve acontecer apos as duas casas para cima
+            if (i < 2) {
+                printf("Cima\n");
+            }
+            break; 
+        }
+        if (i == 1) { // Quando atingir a segunda casa para cima
+            printf("Direita\n");
+        }
+    }
     printf("\n");
 
     return 0;
